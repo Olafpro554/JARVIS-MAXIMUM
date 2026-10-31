@@ -1,4 +1,5 @@
 
+
 name: Build JARVIS Android APK
 
 on:
@@ -23,10 +24,11 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Instalar herramientas Android
-        run: |
-          yes | sdkmanager --licenses || true
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Preparar Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Instalar plataforma Android
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Extraer proyecto
         run: unzip -o JARVIS_ANDROID_SOURCE.zip -d .
